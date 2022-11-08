@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      table{
+        width:80%;
+        text-align: center;
+      }
+    </style>
+    <script>
+      var data =[
+            { "name": "cse", "regno": 101, "cgpa": 7.4 },
+            { "name": "abc", "regno": 102, "cgpa": 6.4 },
+            { "name": "xyz", "regno": 103, "cgpa": 9.4 },
+            { "name": "ddd", "regno": 104, "cgpa": 8.4 },
+            { "name": "fff", "regno": 105, "cgpa": 7.4 }
+      ];
+      var jsonstring = JSON.stringify(data);
+      var javascriptobject = JSON.parse(jsonstring);
+
+      function display() {
+        var view = document.getElementById("view");
+        var viewdata ="<table border=1 cellspacing=0><tr><th>Name</th><th>Regno</th><th>CGPA</th></tr>";
+        for (let i in javascriptobject) {
+          viewdata += "<tr>";
+          viewdata += "<td>" + javascriptobject[i].name + "</td>";
+          viewdata += "<td>" + javascriptobject[i].regno + "</td>";
+          viewdata += "<td>" + javascriptobject[i].cgpa + "</td>";
+          viewdata += "</tr>";
+        }
+        viewdata += "</table>";
+        view.innerHTML = viewdata;
+      }
+
+      function search() {
+        var flag = false;
+        var regno = document.getElementById("data").value;
+        var output = "";
+        for (let i in javascriptobject) {
+          if (javascriptobject[i].regno == regno) {
+            flag = true;
+            output =
+              "Name: " +
+              javascriptobject[i].name +
+              "<br>Regno: " +
+              javascriptobject[i].regno +
+              "<br>Cgpa: " +
+              javascriptobject[i].cgpa;
+            document.getElementById("output").innerHTML = output;
+            break;
+          } else {
+            flag = false;
+          }
+        }
+        if (flag == false) {
+          document.getElementById("output").innerHTML = "Data Not Available";
+        }
+      }
+    </script>
+  </head>
+  <body onload="display()">
+    <div id="view"></div>
+    <hr>
+    Enter Regno: <input type="text" id="data" />
+    <button onclick="search()">submit</button>
+    <div id="output" style="color: red"></div>
+  </body>
+</html>
